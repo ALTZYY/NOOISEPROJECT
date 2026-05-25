@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f1e9; /* Warna krem background atas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.background-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Efek gambar di bagian bawah seperti pada contoh */
+    background: linear-gradient(to bottom, #f5f1e9 60%, #ccc 100%);
+    position: relative;
+}
+
+/* Logo */
+.logo-top h1 {
+    font-size: 8rem;
+    font-weight: bold;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    color: #000;
+    text-shadow: 0 #000;
+    position: absolute;
+        z-index: 2;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+
+}
+.gambarutama {
+     position: absolute; /* Wajib ada */
+        z-index: -0;
+        bottom: -1%;
+}
+
+.gambarbayangan {
+    position: absolute;
+        z-index: 1;        
+}
+
+
+/* Card Utama */
+.login-card {
+    background-color: #63422d; /* Warna cokelat box */
+    padding: 40px 50px;
+    border-radius: 50px;
+    width: 100%;
+    max-width: 700px;
+    color: #fff;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: absolute;
+        z-index: 1;
+        bottom: 10%;
+}
+
+.login-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.signup-text {
+    font-size: 0.8rem;
+    margin-bottom: 25px;
+    color: #e0e0e0;
+}
+
+.signup-text a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* Input Styles */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 25px;
+    border-radius: 30px;
+    border: none;
+    background-color: #fdf8f0;
+    font-size: 1rem;
+    color: #63422d;
+    outline: none;
+}
+
+/* Checkbox & Forgot Password */
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+    padding: 0 10px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.remember-me input {
+    margin-right: 8px;
+    accent-color: #fff;
+}
+
+.forgot-password {
+    color: #fff;
+    text-decoration: none;
+    font-style: italic;
+}
+
+/* Login Button */
+.btn-login {
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    background-color: #fdf8f0;
+    color: #63422d;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #fff;
+    transform: scale(1.02);
+}
+
+/* Social Media Section */
+.social-text {
+    text-align: center;
+    font-size: 0.75rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icons a {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.social-icons .facebook { color: #1877f2; }
+.social-icons .google { color: #ea4335; }
+.social-icons .twitter { color: #1da1f2; }
+
+.social-icons a:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}

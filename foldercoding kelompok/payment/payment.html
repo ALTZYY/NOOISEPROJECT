@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nooise — Pembayaran</title>
+  <link rel="stylesheet" href="stylepayment.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>@makenoooise_</span>
+      <span>+62 333 888 777</span>
+    </div>
+    <div class="topbar-right">
+      <span>www.nooisealbummusic.com.id</span>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo">nooise</div>
+      <button class="cart-btn" id="cartBtn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span class="cart-badge">1</span>
+      </button>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="masukBtn">Masuk</button>
+      <button class="nav-btn nav-btn-primary" id="daftarBtn">Daftar</button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-wrapper">
+    <div class="content-grid">
+
+      <!-- LEFT PANEL -->
+      <div class="left-panel">
+
+        <!-- Search + Title Row -->
+        <div class="search-title-row">
+          <div class="search-box">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" placeholder="Search.." id="searchInput"/>
+          </div>
+          <h2 class="section-title">Pembayaran</h2>
+          <button class="back-btn" id="backBtn" title="Kembali">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
+          </button>
+        </div>
+
+        <!-- Select All -->
+        <div class="select-all-row">
+          <button class="checkbox-btn active" id="selectAllBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <span class="select-label">Pilih Semua <span class="select-count">(1)</span></span>
+        </div>
+
+        <!-- Album Card -->
+        <div class="album-card" id="albumCard">
+          <div class="album-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/en/9/9e/Daniel_Caesar_-_Freudian.png" alt="Freudian" class="album-img" onerror="this.style.background='#6b4c3b';this.src='';this.alt='Freudian'"/>
+          </div>
+          <div class="album-info">
+            <div class="album-name">Freudian</div>
+            <div class="album-artist">Daniel Caesar</div>
+            <div class="album-price">Rp 690.000 x 1</div>
+          </div>
+          <button class="remove-btn" id="removeBtn" title="Hapus">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <!-- Shipping Address -->
+        <div class="section-block">
+          <h3 class="block-title">Alamat Pengiriman</h3>
+          <div class="address-input-row">
+            <div class="address-input-wrap">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pin-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <input type="text" placeholder="Pilih Lokasi Anda..." class="address-input" id="addressInput"/>
+            </div>
+            <button class="pilih-btn" id="pilihBtn">Pilih</button>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="section-block">
+          <h3 class="block-title">Metode Pembayaran E WHALLET</h3>
+          <div class="payment-method-card" id="paymentCard">
+            <div class="dana-logo">
+              <svg width="28" height="28" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#118EEA"/><text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="11" font-weight="700" font-family="sans-serif">DANA</text></svg>
+            </div>
+            <div class="payment-info">
+              <div class="payment-name">Dana</div>
+              <div class="payment-fee">biaya: IDR 181</div>
+            </div>
+            <button class="ganti-btn" id="gantiBtn">Ganti</button>
+          </div>
+        </div>
+
+        <!-- Transaction Protection -->
+        <div class="section-block">
+          <h3 class="block-title protection-title">Perlindungan transaksi</h3>
+          <div class="protection-row">
+            <button class="checkbox-btn active" id="protectionBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <div class="protection-info">
+              <div class="protection-name">Aktifkan Layanan Premium</div>
+              <div class="protection-price">Rp 500.00</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="right-panel">
+        <div class="detail-card">
+          <h3 class="detail-title">Detail Pembayaran</h3>
+
+          <div class="detail-rows">
+            <div class="detail-row">
+              <span class="detail-label">Metode pembayaran</span>
+              <span class="detail-value">Dana (Rekomendasi)</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Total Pesanan</span>
+              <span class="detail-value">Rp 690.000</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Perlindungan transaksi</span>
+              <span class="detail-value">Rp 5.000</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Biaya admin</span>
+              <span class="detail-value">Rp 181</span>
+            </div>
+            <div class="detail-row total-row">
+              <span class="detail-label total-label">Total Pembayaran</span>
+              <span class="detail-value total-value">Rp 695.181</span>
+            </div>
+          </div>
+
+          <button class="bayar-btn" id="bayarBtn">Bayar</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- UNTUK ANDA SECTION -->
+    <section class="untuk-anda">
+      <h2 class="untuk-title">Untuk Anda</h2>
+      <div class="recommendations-grid">
+
+        <div class="rec-card" data-name="NEVER ENOUGH" data-artist="Daniel Caesar" data-price="690.000">
+          <div class="rec-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/en/3/35/Daniel_Caesar_-_Never_Enough.jpg" alt="Never Enough" onerror="this.style.display='none'"/>
+            <div class="rec-img-placeholder" style="background: linear-gradient(135deg,#1a0a2e,#0d47a1)"></div>
+          </div>
+          <div class="rec-info">
+            <div class="rec-name">NEVER ENOUGH</div>
+            <div class="rec-artist">Daniel Caesar</div>
+            <div class="rec-price">Rp 690.000</div>
+          </div>
+        </div>
+
+        <div class="rec-card" data-name="More Life" data-artist="Drake" data-price="500.000">
+          <div class="rec-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/en/7/7f/More_Life_cover.jpg" alt="More Life" onerror="this.style.display='none'"/>
+            <div class="rec-img-placeholder" style="background: linear-gradient(135deg,#1a1a1a,#4a4a4a)"></div>
+          </div>
+          <div class="rec-info">
+            <div class="rec-name">More Life</div>
+            <div class="rec-artist">Drake</div>
+            <div class="rec-price">Rp 500.000</div>
+          </div>
+        </div>
+
+        <div class="rec-card" data-name="Case Study 01" data-artist="Daniel Caesar" data-price="600.000">
+          <div class="rec-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/en/4/43/Daniel_Caesar_-_Case_Study_01.png" alt="Case Study 01" onerror="this.style.display='none'"/>
+            <div class="rec-img-placeholder" style="background: linear-gradient(135deg,#111,#333)"></div>
+          </div>
+          <div class="rec-info">
+            <div class="rec-name">Case Study 01</div>
+            <div class="rec-artist">Daniel Caesar</div>
+            <div class="rec-price">Rp 600.000</div>
+          </div>
+        </div>
+
+        <div class="rec-card" data-name="SOS" data-artist="SZA" data-price="690.000">
+          <div class="rec-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/en/7/77/SZA_-_SOS.png" alt="SOS" onerror="this.style.display='none'"/>
+            <div class="rec-img-placeholder" style="background: linear-gradient(135deg,#0a2744,#1565c0)"></div>
+          </div>
+          <div class="rec-info">
+            <div class="rec-name">SOS</div>
+            <div class="rec-artist">SZA</div>
+            <div class="rec-price">Rp 690.000</div>
+          </div>
+        </div>
+
+        <div class="rec-card" data-name="Good Kid, M.A.A.D City" data-artist="Kendrick Lamar" data-price="690.000">
+          <div class="rec-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/en/9/9c/Good_Kid_Maad_City_Cover.jpg" alt="Good Kid" onerror="this.style.display='none'"/>
+            <div class="rec-img-placeholder" style="background: linear-gradient(135deg,#1b1b1b,#555)"></div>
+          </div>
+          <div class="rec-info">
+            <div class="rec-name">Good Kid, M.A.A.D City</div>
+            <div class="rec-artist">Kendrick Lamar</div>
+            <div class="rec-price">Rp 690.000</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast"></div>
+
+  <!-- PAYMENT SUCCESS MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox">
+      <div class="modal-icon">✓</div>
+      <h3 class="modal-title">Pembayaran Berhasil!</h3>
+      <p class="modal-desc">Terima kasih! Pesanan kamu sedang diproses.</p>
+      <div class="modal-detail">
+        <span>Total Dibayar</span>
+        <strong>Rp 695.181</strong>
+      </div>
+      <button class="modal-close-btn" id="modalCloseBtn">Kembali ke Toko</button>
+    </div>
+  </div>
+
+  <script src="scriptpayment.js"></script>
+</body>
+</html>
