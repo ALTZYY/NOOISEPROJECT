@@ -1,0 +1,138 @@
+.hover1 {
+    color: rgba(255, 251, 238, 1);
+    width: auto;
+    background-color: rgba(108, 68, 44, 1);
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+    grid-area: hover1;
+}
+.hover2 {
+    display: flex; /* Mengaktifkan mode flexbox */
+    justify-content: space-between; /* Mendorong satu grup ke kiri, satu ke kanan */
+    align-items: center; /* Membuat semua elemen sejajar di tengah secara vertikal */
+    padding: 40px 20px;
+    background-color: rgba(255, 251, 238, 1);
+    font-size: 1.5rem;
+    grid-area: hover2;
+}
+.nav-left, .nav-right {
+    display: flex; /* Membuat isi di dalam grup juga berderet ke samping */
+    align-items: center;
+    gap: 20px; /* Memberikan jarak antar elemen di dalam grup (misal: antara logo dan keranjang) */
+}
+
+.nav-right a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.hover_gambar {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 251, 238, 1);
+    grid-area: hover_gam;
+}
+.navigasi{
+    background-color: white;
+    border: 2px solid rgba(223, 223, 223, 0.81);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 7px;
+    width: auto;
+    height: 330px;
+    grid-area: nav;
+}
+.main {
+    background-color: rgba(255, 251, 238, 1);
+    width: auto;
+    height: auto;
+    grid-area: main;
+}
+.footer {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(108, 68, 44, 1);
+    grid-area: footer;
+}
+
+.container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto auto 1fr 200px auto; 
+    grid-template-areas: 
+    "hover1 hover1"
+    "hover2 hover2"
+    "hover_gam hover_gam"
+    "nav main";
+}
+.navigasic input{
+    align-items: center;
+    justify-content: center;
+}
+.rnb_hip {
+    padding: 10px 10px 0px;
+}
+.Kategori {
+    padding: 10px;
+}
+.pop_edm {
+    padding: 0px 10px 15px;
+}
+
+.album-grid {
+    display: grid;
+    /* Membuat 3 kolom otomatis yang responsif */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; /* Jarak antar kartu */
+    max-width: 1px;
+    margin: 0 auto;
+}
+
+/* Styling Kartu */
+.album-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Kotak Cokelat Tempat Gambar */
+.album-image-wrapper {
+    background-color: #704229; /* Warna cokelat sesuai gambar */
+    padding: 25px;
+    border-radius: 12px;
+    aspect-ratio: 16 / 9; /* Menjaga rasio kotak tetap konsisten */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Placeholder untuk visualisasi album & piringan hitam */
+.album-placeholder {
+    width: 80%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+/* Styling Teks Informasi */
+.album-info {
+    margin-top: 12px;
+}
+
+.album-title {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+.album-price {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
+

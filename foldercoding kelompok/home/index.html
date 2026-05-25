@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nooise - Album Music Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>@makenooise_&nbsp;&nbsp;+62 333 888 777</span>
+  <span>www.nooisealbummusic.com.id</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <img src="../../all foto/nooise.png" alt="Pemandangan Gunung di Pagi Hari" width="auto" height="30">
+  </a>
+  <button class="cart-icon" id="cartBtn">
+    <svg viewBox="0 0 24 24">
+      <circle cx="9" cy="21" r="1"/>
+      <circle cx="20" cy="21" r="1"/>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+    </svg>
+    <span class="cart-badge" id="cartBadge">0</span>
+  </button>
+  <div class="nav-actions">
+    <button   class="btn-ghost"  id="btnMasuk">Masuk</button>
+    <button class="btn-ghost" id="btnDaftar">Daftar</button>
+  </div>
+</nav>
+
+<!-- HERO BANNER -->
+<div class="hero">
+  <div class="hero-bg">
+    <div class="hero-collage left">
+      <div class="collage-item c1"></div>
+      <div class="collage-item c2"></div>
+      <div class="collage-item c3"></div>
+      <div class="collage-item c4"></div>
+    </div>
+    <div class="hero-center">
+      <img src="../../all foto/nooise.png" alt="Pemandangan Gunung di Pagi Hari" width="auto" height="80">
+      <div class="hero-artists">
+        <div class="artist-silhouette a1"></div>
+        <div class="artist-silhouette a2"></div>
+        <div class="artist-silhouette a3"></div>
+      </div>
+    </div>
+    <div class="hero-collage right">
+      <div class="collage-item c5"></div>
+      <div class="collage-item c6"></div>
+      <div class="collage-item c7"></div>
+      <div class="collage-item c8"></div>
+    </div>
+  </div>
+  <button class="hero-foto-btn" id="heroFotoBtn">FOTO</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<main>
+
+  <!-- SIDEBAR + PRODUCTS -->
+  <div class="content-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="Search..."/>
+      </div>
+
+      <div class="sidebar-section">
+        <h4 class="sidebar-heading">Kategori</h4>
+        <div class="sidebar-divider"></div>
+        <ul class="category-list">
+          <li><button class="cat-btn active" data-cat="all">Semua</button></li>
+          <li><button class="cat-btn" data-cat="rnb">R&amp;B</button></li>
+          <li><button class="cat-btn" data-cat="hiphop">HipHop</button></li>
+        </ul>
+        <p class="sidebar-sub">Mendatang</p>
+        <ul class="category-list">
+          <li><button class="cat-btn" data-cat="pop">POP</button></li>
+          <li><button class="cat-btn" data-cat="edm">EDM</button></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h4 class="sidebar-heading harga-heading">HARGA</h4>
+        <div class="price-filters">
+          <label class="price-label">
+            <input type="checkbox" class="price-check" data-min="300000" data-max="500000" checked/>
+            <span>Rp 300.000 - Rp 500.000</span>
+          </label>
+          <label class="price-label">
+            <input type="checkbox" class="price-check" data-min="500000" data-max="1000000" checked/>
+            <span>Rp 500.000 - Rp 1.000.000</span>
+          </label>
+          <label class="price-label">
+            <input type="checkbox" class="price-check" data-min="1000000" data-max="9999999" checked/>
+            <span>Rp 1.000.000 +</span>
+          </label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- PRODUCT GRID -->
+    <div class="products-area">
+      <div class="product-grid" id="productGrid">
+
+        <!-- Row 1 -->
+        <div class="product-card" data-id="freudian" data-price="690000" data-cat="rnb" data-title="Freudian Daniel Caesar">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/freudian.jpg" alt="Freudian" onerror="this.parentElement.style.background='#7a4020'"/>
+            <div class="vinyl"></div>
+          </div>
+          <p class="product-name">Freudian-Daniel caesar</p>
+          <p class="product-price">Rp 690.000</p>
+          <button class="btn-add-cart" data-title="Freudian - Daniel Caesar" data-price="690000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-id="baby" data-price="550000" data-cat="pop" data-title="Baby Justin Bieber">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/Justin Bieber _ My World 2_0 _ Album art, Promo photos.jpg" alt="Baby" onerror="this.parentElement.style.background='#7a4020'"/>
+            <div class="vinyl"></div>
+          </div>
+          <p class="product-name">Baby-Justin Bieber</p>
+          <p class="product-price">Rp 550.000</p>
+          <button class="btn-add-cart" data-title="Baby - Justin Bieber" data-price="550000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-id="sos" data-price="690000" data-cat="rnb" data-title="SOS SZA">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/sos.jpg" alt="SOS" onerror="this.parentElement.style.background='#7a4020'"/>
+            <div class="vinyl"></div>
+          </div>
+          <p class="product-name">SOS - SZA</p>
+          <p class="product-price">Rp 690.000</p>
+          <button class="btn-add-cart" data-title="SOS - SZA" data-price="690000">+ Keranjang</button>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="product-card" data-id="keane" data-price="500000" data-cat="pop" data-title="Somewhere Only We Know Keane">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/Keane.jpg" alt="Keane" onerror="this.parentElement.style.background='#7a4020'"/>
+            <div class="vinyl vinyl-white"></div>
+          </div>
+          <p class="product-name">somewhere-only-we-know-Kean</p>
+          <p class="product-price">Rp 500.000</p>
+          <button class="btn-add-cart" data-title="Somewhere Only We Know - Keane" data-price="500000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-id="never-enough" data-price="690000" data-cat="rnb" data-title="Never Enough Daniel Caesar">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/danielcesar.jpg" alt="Never Enough" onerror="this.parentElement.style.background='#1a2a4a'"/>
+            <div class="vinyl"></div>
+          </div>
+          <p class="product-name">NEVER ENOUGH - Daniel Caesar</p>
+          <p class="product-price">Rp 690.000</p>
+          <button class="btn-add-cart" data-title="NEVER ENOUGH - Daniel Caesar" data-price="690000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-price="690000" data-cat="rnb" data-title="Blond Frank Ocean">
+          <div class="product-img-wrap brown">
+            <img src="https://upload.wikimedia.org/wikipedia/en/a/a0/Blonde_-_Frank_Ocean.jpeg" alt="Blond" onerror="this.parentElement.style.background='#f5e8d0'"/>
+            <div class="vinyl vinyl-white"></div>
+          </div>
+          <p class="product-name">BLOND</p>
+          <p class="product-price">Rp 690.000</p>
+          <button class="btn-add-cart" data-title="Blonde - Frank Ocean" data-price="690000">+ Keranjang</button>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="product-card" data-price="600000" data-cat="rnb" data-title="Case Study 01 Daniel Caesar">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/cast.jpg" alt="Case Study" onerror="this.parentElement.style.background='#2a2a2a'"/>
+            <div class="vinyl"></div>
+          </div>
+          <p class="product-name">Case-Study-01-Daniel Caesar</p>
+          <p class="product-price">Rp 600.000</p>
+          <button class="btn-add-cart" data-title="Case Study 01 - Daniel Caesar" data-price="600000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-price="550000" data-cat="rnb" data-title="Party Next Door Two">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/Partynextdoor Two (Vinyl).jpg" alt="PARTY" onerror="this.parentElement.style.background='#1a1a1a'"/>
+            <div class="vinyl vinyl-white"></div>
+          </div>
+          <p class="product-name">PARTY-NEXT-DOOR-TWO</p>
+          <p class="product-price">Rp 550.000</p>
+          <button class="btn-add-cart" data-title="PARTY NEXT DOOR TWO" data-price="550000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-price="500000" data-cat="hiphop" data-title="More Life Drake">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/Drake More Life.jpg" alt="More Life" onerror="this.parentElement.style.background='#111'"/>
+            <div class="vinyl"></div>
+          </div>
+          <p class="product-name">More-Life-Drake</p>
+          <p class="product-price">Rp 500.000</p>
+          <button class="btn-add-cart" data-title="More Life - Drake" data-price="500000">+ Keranjang</button>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="product-card" data-price="500000" data-cat="hiphop" data-title="Heroes Villains Metro Boomin">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/Umbrella (with 21 Savage & Young Nudy).jpg" alt="Heroes" onerror="this.parentElement.style.background='#1a1a1a'"/>
+            <div class="vinyl vinyl-white"></div>
+          </div>
+          <p class="product-name">Heroes &amp; Villains</p>
+          <p class="product-price">Rp 500.000</p>
+          <button class="btn-add-cart" data-title="Heroes & Villains - Metro Boomin" data-price="500000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-price="450000" data-cat="hiphop" data-title="Future">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/i am music.jpg" alt="Future" onerror="this.parentElement.style.background='#8b6914'"/>
+            <div class="vinyl vinyl-white"></div>
+          </div>
+          <p class="product-name">MUSIC</p>
+          <p class="product-price">Rp 450.000</p>
+          <button class="btn-add-cart" data-title="Future - Future" data-price="450000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-price="750000" data-cat="hiphop" data-title="Good Kid MAAD City Kendrick Lamar">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/goodkid.jpg" alt="GKMC" onerror="this.parentElement.style.background='#2a3a4a'"/>
+            <div class="vinyl vinyl-blue"></div>
+          </div>
+          <p class="product-name">Good Kid, M.A.A.D. City</p>
+          <p class="product-price">Rp 750.000</p>
+          <button class="btn-add-cart" data-title="Good Kid M.A.A.D City - Kendrick Lamar" data-price="750000">+ Keranjang</button>
+        </div>
+
+        <!-- Row 5 -->
+        <div class="product-card" data-price="850000" data-cat="hiphop" data-title="DAMN Kendrick Lamar">
+          <div class="product-img-wrap brown">
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png" alt="DAMN" onerror="this.parentElement.style.background='#8b0000'"/>
+            <div class="vinyl vinyl-red"></div>
+          </div>
+          <p class="product-name">DAMN</p>
+          <p class="product-price">Rp 850.000</p>
+          <button class="btn-add-cart" data-title="DAMN - Kendrick Lamar" data-price="850000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-price="700000" data-cat="hiphop" data-title="Astroworld Travis Scott">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/travis.jpg" alt="Astroworld" onerror="this.parentElement.style.background='#c17f24'"/>
+            <div class="vinyl vinyl-red"></div>
+          </div>
+          <p class="product-name">ASTROWORLD</p>
+          <p class="product-price">Rp 700.000</p>
+          <button class="btn-add-cart" data-title="ASTROWORLD - Travis Scott" data-price="700000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-price="550000" data-cat="hiphop" data-title="American Dream 21 Savage">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/american dream - 21 Savage.jpg" alt="American Dream" onerror="this.parentElement.style.background='#2a2a2a'"/>
+            <div class="vinyl vinyl-red"></div>
+          </div>
+          <p class="product-name">American Dream</p>
+          <p class="product-price">Rp 550.000</p>
+          <button class="btn-add-cart" data-title="American Dream - 21 Savage" data-price="550000">+ Keranjang</button>
+        </div>
+
+        <!-- Row 6 -->
+        <div class="product-card" data-price="650000" data-cat="hiphop" data-title="We Still Don't Trust You Metro Boomin Future">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/WE STILL DONT TRUST YOU.jpg" alt="Trust" onerror="this.parentElement.style.background='#1a1a1a'"/>
+            <div class="vinyl vinyl-white"></div>
+          </div>
+          <p class="product-name">We Still Don't Trust You</p>
+          <p class="product-price">Rp 650.000</p>
+          <button class="btn-add-cart" data-title="We Still Don't Trust You - Metro Boomin" data-price="650000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-price="500000" data-cat="pop" data-title="House of Ballons The Weeknd">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/House of balloons - The Weeknd.jpg" alt="House of Ballons" onerror="this.parentElement.style.background='#d0c8b8'"/>
+            <div class="vinyl vinyl-white"></div>
+          </div>
+          <p class="product-name">House Of Ballons</p>
+          <p class="product-price">Rp 500.000</p>
+          <button class="btn-add-cart" data-title="House of Ballons - The Weeknd" data-price="500000">+ Keranjang</button>
+        </div>
+
+        <div class="product-card" data-price="600000" data-cat="rnb" data-title="Wasteland Brent Faiyaz">
+          <div class="product-img-wrap brown">
+            <img src="../../all foto/wasteland.jpg" alt="Wasteland" onerror="this.parentElement.style.background='#1a1a1a'"/>
+            <div class="vinyl vinyl-red"></div>
+          </div>
+          <p class="product-name">Wasteland</p>
+          <p class="product-price">Rp 600.000</p>
+          <button class="btn-add-cart" data-title="Wasteland - Brent Faiyaz" data-price="600000">+ Keranjang</button>
+        </div>
+
+      </div><!-- /product-grid -->
+
+      <p class="no-results" id="noResults" style="display:none">Tidak ada produk ditemukan.</p>
+    </div><!-- /products-area -->
+
+  </div><!-- /content-layout -->
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo">no&#8734;ise</span>
+      <p class="footer-tag">100%</p>
+      <p class="footer-sub">AUTHENTIC &amp; GUARANTEED</p>
+    </div>
+    <div class="footer-col">
+      <a href="#">FAQ</a>
+      <a href="#">Syarat &amp; Ketentuan</a>
+      <a href="#">Panduan Beli</a>
+      <a href="#">NooiseNews</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Keep in touch with us!</p>
+      <div class="social-icons">
+        <a href="#" class="social-btn" title="Email">&#9993;</a>
+        <a href="#" class="social-btn" title="TikTok">&#9835;</a>
+        <a href="#" class="social-btn" title="Instagram">&#9711;</a>
+      </div>
+    </div>
+    <div class="footer-col store-col">
+      <a href="#" class="store-badge" id="btnAppStore">&#63743; App Store</a>
+      <a href="#" class="store-badge" id="btnGPlay">&#9654; Google Play</a>
+    </div>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

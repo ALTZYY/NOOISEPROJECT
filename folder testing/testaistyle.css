@@ -1,0 +1,59 @@
+body {
+    background-color: #fdfaf4; /* Warna background krem lembut */
+    font-family: sans-serif;
+    padding: 40px;
+}
+
+/* Kontainer Utama dengan CSS Grid */
+.album-grid {
+    display: grid;
+    /* Membuat 3 kolom otomatis yang responsif */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; /* Jarak antar kartu */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Styling Kartu */
+.album-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Kotak Cokelat Tempat Gambar */
+.album-image-wrapper {
+    background-color: #704229; /* Warna cokelat sesuai gambar */
+    padding: 25px;
+    border-radius: 12px;
+    aspect-ratio: 16 / 9; /* Menjaga rasio kotak tetap konsisten */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Placeholder untuk visualisasi album & piringan hitam */
+.album-placeholder {
+    width: 80%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+/* Styling Teks Informasi */
+.album-info {
+    margin-top: 12px;
+}
+
+.album-title {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+.album-price {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
