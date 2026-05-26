@@ -207,9 +207,9 @@
             <input type="text" placeholder="Search.." id="searchInput"/>
           </div>
           <h2 class="section-title">Pembayaran</h2>
-          <button class="back-btn" id="backBtn" title="Kembali">
+          <!-- <button class="back-btn" id="backBtn" title="Kembali">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
-          </button>
+          </button> -->
         </div>
 
         <!-- Select All -->
