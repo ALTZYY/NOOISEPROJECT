@@ -132,100 +132,181 @@ nav {
 .btn-ghost:hover { background: var(--brown-dark); color: var(--white); }
 .btn-ghost:active { transform: scale(0.95); box-shadow: 0 2px 8px rgba(59,31,14,0.2); }
 
-/* HERO */
-.hero {
-  position: relative;
-  height: 240px;
+/* HERO SLIDER (FULL-WIDTH CAROUSEL) */
+.hero-slider-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  animation: fadeUp 0.5s ease both;
+}
+
+.hero-swiper {
+  width: 100%;
+  height: 240px; /* Same height as original design */
+  border-radius: 0;
   overflow: hidden;
-  background: #2a1005;
+  box-shadow: 0 4px 12px rgba(59, 31, 14, 0.08);
+  background: #1a0800; /* fallback elegant dark background */
 }
 
-.hero-bg {
-  display: flex;
+.hero-swiper .swiper-slide {
+  width: 100%;
   height: 100%;
-}
-
-.hero-collage {
-  flex: 0 0 220px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 4px;
-  padding: 4px;
-  opacity: 0.75;
-}
-
-.collage-item {
-  border-radius: 4px;
-  background: var(--brown-card);
-}
-
-.c1 { background: linear-gradient(135deg, #c17f24, #8b4513); }
-.c2 { background: linear-gradient(135deg, #1a3a5c, #0a1a2a); }
-.c3 { background: linear-gradient(135deg, #8b0000, #2a0a0a); }
-.c4 { background: linear-gradient(135deg, #2a4a2a, #1a2a1a); }
-.c5 { background: linear-gradient(135deg, #5a2d8a, #2a1a4a); }
-.c6 { background: linear-gradient(135deg, #c49a6c, #8b5a2a); }
-.c7 { background: linear-gradient(135deg, #1a1a3a, #0a0a1a); }
-.c8 { background: linear-gradient(135deg, #3a5a2a, #1a2a1a); }
-
-.hero-center {
-  flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(160deg, #2a1005, #1a0800);
-  position: relative;
 }
 
-.hero-logo {
-  font-family: 'DM Serif Display', serif;
-  font-size: 3rem;
-  color: var(--brown-light);
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 2;
+.hero-swiper .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  pointer-events: none;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.hero-artists {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-end;
-  position: absolute;
-  bottom: 0;
+/* Hover effect on slide image */
+.hero-swiper:hover .swiper-slide img {
+  transform: scale(1.025);
 }
 
-.artist-silhouette {
-  border-radius: 8px 8px 0 0;
-  background: rgba(255,255,255,0.08);
+/* Elegant circular navigation buttons */
+.hero-swiper .swiper-button-prev,
+.hero-swiper .swiper-button-next {
+  width: 46px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(232, 221, 208, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  color: var(--brown-dark);
+  box-shadow: 0 4px 14px rgba(59, 31, 14, 0.15);
+  opacity: 0;
+  transform: scale(0.85);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.a1 { width: 90px; height: 160px; background: linear-gradient(180deg, rgba(200,168,130,0.1), rgba(200,168,130,0.3)); }
-.a2 { width: 80px; height: 200px; background: linear-gradient(180deg, rgba(200,168,130,0.08), rgba(200,168,130,0.25)); }
-.a3 { width: 85px; height: 150px; background: linear-gradient(180deg, rgba(200,168,130,0.1), rgba(200,168,130,0.28)); }
-
-.hero-foto-btn {
-  position: absolute;
-  left: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255,255,255,0.12);
-  border: 1.5px solid rgba(255,255,255,0.3);
-  color: rgba(255,255,255,0.8);
-  font-family: inherit;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  padding: 0.4rem 0.9rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+/* Show arrows on hover */
+.hero-swiper:hover .swiper-button-prev,
+.hero-swiper:hover .swiper-button-next {
+  opacity: 1;
+  transform: scale(1);
 }
 
-.hero-foto-btn:hover { background: rgba(255,255,255,0.22); }
-.hero-foto-btn:active { transform: translateY(-50%) scale(1.08); box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
+.hero-swiper .swiper-button-prev::after,
+.hero-swiper .swiper-button-next::after {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.hero-swiper .swiper-button-prev {
+  left: 24px;
+}
+
+.hero-swiper .swiper-button-next {
+  right: 24px;
+}
+
+.hero-swiper .swiper-button-prev:hover,
+.hero-swiper .swiper-button-next:hover {
+  background: var(--white);
+  color: var(--brown-mid);
+  box-shadow: 0 6px 20px rgba(59, 31, 14, 0.25);
+}
+
+/* Elegant flat pagination dots */
+.hero-swiper .swiper-pagination-bullets {
+  bottom: 16px !important;
+  background: rgba(42, 21, 5, 0.45);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: var(--white);
+  opacity: 0.5;
+  margin: 0 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+  width: 22px; /* Active dot is wider like modern carousels */
+  border-radius: 4px;
+  background: var(--brown-light);
+  opacity: 1;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .hero-swiper {
+    height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-swiper {
+    height: 180px;
+  }
+  
+  /* Retain navigation arrows with a slight touch adjustment */
+  .hero-swiper .swiper-button-prev,
+  .hero-swiper .swiper-button-next {
+    width: 36px;
+    height: 36px;
+    opacity: 0.85;
+    transform: scale(0.9);
+  }
+  
+  .hero-swiper .swiper-button-prev::after,
+  .hero-swiper .swiper-button-next::after {
+    font-size: 0.9rem;
+  }
+  
+  .hero-swiper .swiper-button-prev {
+    left: 12px;
+  }
+  
+  .hero-swiper .swiper-button-next {
+    right: 12px;
+  }
+
+  .hero-swiper .swiper-pagination-bullets {
+    bottom: 12px !important;
+    padding: 4px 10px;
+  }
+  
+  .hero-swiper .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+  }
+
+  .hero-swiper .swiper-pagination-bullet-active {
+    width: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-swiper {
+    height: 140px;
+  }
+  .hero-swiper .swiper-button-prev,
+  .hero-swiper .swiper-button-next {
+    display: none; /* Hide navigation arrows on small mobile devices to maximize viewable area */
+  }
+}
 
 /* MAIN */
 main {

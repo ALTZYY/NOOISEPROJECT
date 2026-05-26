@@ -535,7 +535,7 @@ body {
 
 .recommendations-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -711,12 +711,12 @@ body {
 @media (max-width: 860px) {
   .content-grid { grid-template-columns: 1fr; }
   .right-panel { position: static; }
-  .recommendations-grid { grid-template-columns: repeat(3, 1fr); }
+  .recommendations-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 560px) {
   .topbar { display: none; }
   .navbar { padding: 0 16px; }
   .main-wrapper { padding: 20px 12px 48px; }
-  .recommendations-grid { grid-template-columns: repeat(2, 1fr); }
+  .recommendations-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .left-panel { padding: 18px; }
 }

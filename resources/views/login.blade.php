@@ -24,10 +24,10 @@
 
         <div class="login-card">
             <h2>Login</h2>
-            <p class="signup-text">Don't have an account? <a href="registasisisi.html">Sign up here</a></p>
+            <p class="signup-text">Don't have an account? <a href="{{ route('halaman.register') }}">Sign up here</a></p>
             
             
-    <form method="POST" action="/login">
+    <form method="POST" action="{{ route('login.post') }}">
         @csrf
 
                 <div class="input-group">

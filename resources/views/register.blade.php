@@ -24,9 +24,9 @@
 
         <main class="register-card">
             <h2>Register</h2>
-            <p class="login-link">Already have an account? <a href="/login">Login here</a></p>
+            <p class="login-link">Already have an account? <a href="{{ route('halaman.login') }}">Login here</a></p>
 
-            <form method="POST" action="/register">
+            <form method="POST" action="{{ route('register.post') }}">
                 @csrf
 
                 <div class="input-group">

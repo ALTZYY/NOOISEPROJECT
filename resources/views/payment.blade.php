@@ -226,16 +226,18 @@
             <p style="color:#a58b77;margin:16px 0;text-align:center;font-family:'DM Sans',sans-serif;">Keranjang Anda kosong.</p>
           @else
             @foreach($carts as $cart)
-              <div class="album-card">
-                <div class="album-img-wrap">
-                  <img src="{{ asset($cart->product->image) }}" alt="{{ $cart->product->name }}" class="album-img" onerror="this.style.background='#6b4c3b';"/>
+              <a href="{{ route('halaman.deskripsi', ['id' => $cart->product->id]) }}" class="cart-item-link" style="text-decoration: none; color: inherit; display: block;">
+                <div class="album-card">
+                  <div class="album-img-wrap">
+                    <img src="{{ asset($cart->product->image) }}" alt="{{ $cart->product->name }}" class="album-img" onerror="this.style.background='#6b4c3b';"/>
+                  </div>
+                  <div class="album-info">
+                    <div class="album-name">{{ $cart->product->name }}</div>
+                    <div class="album-artist">{{ $cart->product->brand }}</div>
+                    <div class="album-price">Rp {{ number_format($cart->product->price, 0, ',', '.') }} x {{ $cart->quantity }}</div>
+                  </div>
                 </div>
-                <div class="album-info">
-                  <div class="album-name">{{ $cart->product->name }}</div>
-                  <div class="album-artist">{{ $cart->product->brand }}</div>
-                  <div class="album-price">Rp {{ number_format($cart->product->price, 0, ',', '.') }} x {{ $cart->quantity }}</div>
-                </div>
-              </div>
+              </a>
             @endforeach
           @endif
         </div>
@@ -319,67 +321,31 @@
     <section class="untuk-anda">
       <h2 class="untuk-title">Untuk Anda</h2>
       <div class="recommendations-grid">
+        @php
+          $recommendations = \App\Models\Product::whereIn('sku', [
+              'SKU-NEVER-ENOUGH-DC',
+              'SKU-MORE-LIFE-DR',
+              'SKU-CASE-STUDY-01-DC',
+              'SKU-SOS-SZA',
+              'SKU-GKMC'
+          ])->get();
+        @endphp
 
-        <div class="rec-card" data-name="NEVER ENOUGH" data-artist="Daniel Caesar" data-price="690.000">
-          <div class="rec-img-wrap">
-            <img src="https://upload.wikimedia.org/wikipedia/en/3/35/Daniel_Caesar_-_Never_Enough.jpg" alt="Never Enough" onerror="this.style.display='none'"/>
-            <div class="rec-img-placeholder" style="background: linear-gradient(135deg,#1a0a2e,#0d47a1)"></div>
-          </div>
-          <div class="rec-info">
-            <div class="rec-name">NEVER ENOUGH</div>
-            <div class="rec-artist">Daniel Caesar</div>
-            <div class="rec-price">Rp 690.000</div>
-          </div>
-        </div>
-
-        <div class="rec-card" data-name="More Life" data-artist="Drake" data-price="500.000">
-          <div class="rec-img-wrap">
-            <img src="https://upload.wikimedia.org/wikipedia/en/7/7f/More_Life_cover.jpg" alt="More Life" onerror="this.style.display='none'"/>
-            <div class="rec-img-placeholder" style="background: linear-gradient(135deg,#1a1a1a,#4a4a4a)"></div>
-          </div>
-          <div class="rec-info">
-            <div class="rec-name">More Life</div>
-            <div class="rec-artist">Drake</div>
-            <div class="rec-price">Rp 500.000</div>
-          </div>
-        </div>
-
-        <div class="rec-card" data-name="Case Study 01" data-artist="Daniel Caesar" data-price="600.000">
-          <div class="rec-img-wrap">
-            <img src="https://upload.wikimedia.org/wikipedia/en/4/43/Daniel_Caesar_-_Case_Study_01.png" alt="Case Study 01" onerror="this.style.display='none'"/>
-            <div class="rec-img-placeholder" style="background: linear-gradient(135deg,#111,#333)"></div>
-          </div>
-          <div class="rec-info">
-            <div class="rec-name">Case Study 01</div>
-            <div class="rec-artist">Daniel Caesar</div>
-            <div class="rec-price">Rp 600.000</div>
-          </div>
-        </div>
-
-        <div class="rec-card" data-name="SOS" data-artist="SZA" data-price="690.000">
-          <div class="rec-img-wrap">
-            <img src="https://upload.wikimedia.org/wikipedia/en/7/77/SZA_-_SOS.png" alt="SOS" onerror="this.style.display='none'"/>
-            <div class="rec-img-placeholder" style="background: linear-gradient(135deg,#0a2744,#1565c0)"></div>
-          </div>
-          <div class="rec-info">
-            <div class="rec-name">SOS</div>
-            <div class="rec-artist">SZA</div>
-            <div class="rec-price">Rp 690.000</div>
-          </div>
-        </div>
-
-        <div class="rec-card" data-name="Good Kid, M.A.A.D City" data-artist="Kendrick Lamar" data-price="690.000">
-          <div class="rec-img-wrap">
-            <img src="https://upload.wikimedia.org/wikipedia/en/9/9c/Good_Kid_Maad_City_Cover.jpg" alt="Good Kid" onerror="this.style.display='none'"/>
-            <div class="rec-img-placeholder" style="background: linear-gradient(135deg,#1b1b1b,#555)"></div>
-          </div>
-          <div class="rec-info">
-            <div class="rec-name">Good Kid, M.A.A.D City</div>
-            <div class="rec-artist">Kendrick Lamar</div>
-            <div class="rec-price">Rp 690.000</div>
-          </div>
-        </div>
-
+        @foreach($recommendations as $rec)
+          <a href="{{ route('halaman.deskripsi', ['id' => $rec->id]) }}" class="rec-card-link" style="text-decoration: none; color: inherit; display: block;">
+            <div class="rec-card" data-name="{{ $rec->name }}" data-artist="{{ $rec->brand }}" data-price="{{ $rec->price }}">
+              <div class="rec-img-wrap">
+                <img src="{{ asset($rec->image) }}" alt="{{ $rec->name }}" onerror="this.style.display='none'"/>
+                <div class="rec-img-placeholder" style="background: linear-gradient(135deg, #5a3a28, #7a4f38)"></div>
+              </div>
+              <div class="rec-info">
+                <div class="rec-name">{{ $rec->name }}</div>
+                <div class="rec-artist">{{ $rec->brand }}</div>
+                <div class="rec-price">Rp {{ number_format($rec->price, 0, ',', '.') }}</div>
+              </div>
+            </div>
+          </a>
+        @endforeach
       </div>
     </section>
   </main>

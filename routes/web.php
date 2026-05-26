@@ -26,18 +26,7 @@ Route::post('/cart/add', [\App\Http\Controllers\CartController::class, 'addToCar
 Route::post('/cart/update-quantity', [\App\Http\Controllers\CartController::class, 'updateQuantity'])->name('cart.update');
 
 
-Route::get('/home', function (\Illuminate\Http\Request $request) {
-    $userEmail = $request->session()->get('user_email');
-    $cartCount = 0;
-    if ($userEmail) {
-        $user = \App\Models\User::where('email', $userEmail)->first();
-        if ($user) {
-            $cartCount = \App\Models\Cart::where('user_id', $user->id)->sum('quantity');
-        }
-    }
-    $products = \App\Models\Product::all();
-    return view('home', compact('cartCount', 'products'));
-})->name('halaman.home');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('halaman.home');
 
 Route::get('/login', function () {
     return view('login'); // Ini akan memanggil file about.blade.php

@@ -6,6 +6,8 @@
   <title>Nooise - Album Music Store</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="{{asset('cssnooise/stylehome.css') }}"/>
+  <!-- Swiper.js CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
 
@@ -39,31 +41,22 @@
   </div>
 </nav>
 
-<!-- HERO BANNER -->
-<div class="hero">
-  <div class="hero-bg">
-    <div class="hero-collage left">
-      <div class="collage-item c1"></div>
-      <div class="collage-item c2"></div>
-      <div class="collage-item c3"></div>
-      <div class="collage-item c4"></div>
+<!-- HERO BANNER (SWIPER IMAGE SLIDER) -->
+<div class="hero-slider-container">
+  <div class="swiper hero-swiper">
+    <div class="swiper-wrapper">
+      @foreach($slides as $slide)
+        <div class="swiper-slide">
+          <img src="{{ asset($slide) }}" alt="Nooise Promo Banner">
+        </div>
+      @endforeach
     </div>
-    <div class="hero-center">
-      <div class="hero-logo">no<span>&#8734;</span>ise</div>
-      <div class="hero-artists">
-        <div class="artist-silhouette a1"></div>
-        <div class="artist-silhouette a2"></div>
-        <div class="artist-silhouette a3"></div>
-      </div>
-    </div>
-    <div class="hero-collage right">
-      <div class="collage-item c5"></div>
-      <div class="collage-item c6"></div>
-      <div class="collage-item c7"></div>
-      <div class="collage-item c8"></div>
-    </div>
+    <!-- Pagination (titik-titik di bawah) -->
+    <div class="swiper-pagination"></div>
+    <!-- Navigasi panah kiri-kanan -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
   </div>
-  <button class="hero-foto-btn" id="heroFotoBtn">FOTO</button>
 </div>
 
 <!-- MAIN CONTENT -->
@@ -212,6 +205,33 @@
         })
         .catch(error => console.error('Error:', error));
       });
+    });
+  });
+</script>
+<!-- Swiper.js JS CDN & Initialization -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const swiper = new Swiper('.hero-swiper', {
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        dynamicBullets: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      keyboard: {
+        enabled: true,
+      },
+      effect: 'slide',
+      speed: 800,
     });
   });
 </script>
