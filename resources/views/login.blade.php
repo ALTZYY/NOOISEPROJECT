@@ -41,7 +41,7 @@
 
                 <div class="options">
                     <label class="remember-me">
-                        <a href="{{route('halaman.register')}}" class="remembertext">registasi</a>
+                        <a href="{{route('halaman.register')}}" class="remembertext"></a>
                         <!-- <input type="checkbox"> <span>Remember me</span> -->
                     </label>
                     <a href="#" class="forgot-password">Forgot password</a>
