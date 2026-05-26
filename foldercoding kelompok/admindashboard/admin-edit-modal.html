@@ -1,0 +1,65 @@
+<!-- Modal Edit Pesanan (dipakai admin-dashboard.html) -->
+<div id="editModal" class="hidden fixed inset-0 z-50">
+  <div class="absolute inset-0 bg-black/30" onclick="closeEditModal()"></div>
+
+  <div class="relative mx-auto mt-20 w-[92%] max-w-lg">
+    <div class="rounded-2xl bg-white/95 border border-nooise-brown-dark/10 shadow-2xl overflow-hidden">
+      <div class="px-5 py-4 border-b border-nooise-brown-dark/10 flex items-start justify-between gap-4">
+        <div>
+          <h3 class="text-lg font-bold text-nooise-brown-dark">Edit Pesanan</h3>
+          <p class="text-sm text-nooise-text/60">Ubah status dan data ringkas pesanan.</p>
+        </div>
+        <button type="button" class="btn-icon" onclick="closeEditModal()" aria-label="Tutup modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="px-5 py-4">
+        <div class="grid grid-cols-1 gap-3">
+          <div>
+            <label class="text-sm font-semibold text-nooise-text/70">ID Pesanan</label>
+            <div class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-bold text-nooise-brown-dark" data-field="id">-</div>
+          </div>
+
+          <div>
+            <label class="text-sm font-semibold text-nooise-text/70">Nama Pelanggan</label>
+            <div class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-semibold text-nooise-text" data-field="nama">-</div>
+          </div>
+
+          <div>
+            <label class="text-sm font-semibold text-nooise-text/70">Judul Album</label>
+            <div class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-semibold text-nooise-text" data-field="album">-</div>
+          </div>
+
+          <div>
+            <label class="text-sm font-semibold text-nooise-text/70">Harga</label>
+            <div class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-bold text-nooise-brown-dark" data-field="harga">-</div>
+          </div>
+
+          <div>
+            <label class="text-sm font-semibold text-nooise-text/70">Status</label>
+            <select
+              class="mt-1 w-full px-3 py-2 rounded-xl bg-white border border-nooise-brown-dark/15 text-sm outline-none"
+              data-field="status">
+              <option class="" value="Diproses">Diproses</option>
+              <option value="Dibayar">Dibayar</option>
+              <option value="Dikirim">Dikirim</option>
+              <option value="Menunggu">Menunggu</option>
+              <option value="Batal">Batal</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-5 py-4 border-t border-nooise-brown-dark/10 flex items-center justify-end gap-3">
+        <button type="button" class="btn-soft" onclick="closeEditModal()">
+          Batal
+        </button>
+        <button type="button" class="btn-primary">
+          Simpan Perubahan
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
