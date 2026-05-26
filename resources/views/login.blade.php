@@ -50,11 +50,7 @@
                 <button type="submit" class="btn-login">Login</button>
             </form>
 
-            <p class="social-text">Login instantly using your social media</p>
-            <div class="social-icons">
-                <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="google"><i class="fab fa-google"></i></a>
-                <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+           
             </div>
         </div>
     </div>
