@@ -8,8 +8,23 @@
   <link rel="stylesheet" href="{{asset('cssnooise/stylehome.css') }}"/>
   <!-- Swiper.js CSS CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  
+  <!-- Tailwind CSS CDN with Preflight disabled to protect existing layout styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: {
+        preflight: false,
+      }
+    }
+  </script>
+  <!-- Alpine.js CDN -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
 </head>
-<body>
+<body x-data="{ showModal: false }">
 
 <!-- TOP BAR -->
 <div class="topbar">
@@ -37,7 +52,7 @@
     <form action="{{route('halaman.login')}}">
       <button class="btn-ghost" id="btnLog-out">Log-out</button>
     </form>
-    <!-- <button class="btn-ghost" id="btnDaftar">Daftar</button> -->
+    <button class="btn-ghost" id="btnDaftar" @click="showModal = true">Profile</button>
   </div>
 </nav>
 
@@ -236,5 +251,100 @@
   });
 </script>
 <script src="{{ asset('script.js') }}"></script>
+
+<!-- FLOATING MODAL PROFILE (Tailwind CSS + Alpine.js) -->
+<div 
+  x-show="showModal" 
+  class="fixed inset-0 z-[9999] flex items-center justify-center p-4" 
+  x-cloak
+>
+  <!-- Dark glassmorphism overlay -->
+  <div 
+    x-show="showModal"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    @click="showModal = false"
+    class="fixed inset-0 bg-[#3b1f0e]/70 backdrop-blur-sm transition-opacity"
+  ></div>
+
+  <!-- Modal Box -->
+  <div 
+    x-show="showModal"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 scale-95"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-95"
+    class="relative bg-white rounded-2xl w-full max-w-sm overflow-hidden p-8 shadow-2xl border border-[#c49a6c]/20 z-10 transition-all text-center"
+  >
+    <!-- Accent Top Bar -->
+    <div class="absolute top-0 left-0 right-0 h-1.5 bg-[#c49a6c]"></div>
+
+    <!-- Close Button (X) -->
+    <button 
+      @click="showModal = false" 
+      class="absolute top-4 right-4 text-[#5a3a1a] hover:text-[#3b1f0e] bg-[#ede6d6]/50 hover:bg-[#ede6d6] p-1.5 rounded-full transition-all duration-200 cursor-pointer border-0"
+      aria-label="Tutup"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    @if($user)
+      <!-- Profile User Icon -->
+      <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#ede6d6]/50 flex items-center justify-center text-[#5a2d0c]">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+
+      <h3 class="text-lg font-bold text-[#3b1f0e] mb-4 font-serif" style="font-family: 'DM Serif Display', serif;">Informasi Profil</h3>
+
+      <!-- Contact Details from DB -->
+      <div class="space-y-3 text-left mb-6">
+        <div class="bg-[#ede6d6]/30 border border-[#ede6d6]/60 rounded-xl p-3.5">
+          <span class="block text-[10px] uppercase tracking-wider text-[#9a7050] font-semibold mb-0.5">Email</span>
+          <span class="text-sm font-bold text-[#3b1f0e] break-all">{{ $user->email }}</span>
+        </div>
+        
+        <div class="bg-[#ede6d6]/30 border border-[#ede6d6]/60 rounded-xl p-3.5">
+          <span class="block text-[10px] uppercase tracking-wider text-[#9a7050] font-semibold mb-0.5">Nomor Telepon</span>
+          <span class="text-sm font-bold text-[#3b1f0e]">{{ $user->phone_number ?? '-' }}</span>
+        </div>
+      </div>
+    @else
+      <!-- Not Logged In State -->
+      <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#ede6d6]/50 flex items-center justify-center text-[#9a7050]">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+        </svg>
+      </div>
+
+      <h3 class="text-lg font-bold text-[#3b1f0e] mb-2 font-serif" style="font-family: 'DM Serif Display', serif;">Belum Masuk</h3>
+      <p class="text-sm text-[#9a7050] mb-6">Silakan masuk ke akun Anda terlebih dahulu untuk melihat informasi profil Anda.</p>
+
+      <a 
+        href="{{ route('halaman.login') }}"
+        class="block w-full py-2.5 bg-[#5a2d0c] hover:bg-[#6b3a1f] text-white font-semibold rounded-xl text-center shadow-md hover:shadow-lg transition-all duration-200 text-sm no-underline"
+      >
+        Login Sekarang
+      </a>
+    @endif
+
+    <button 
+      @click="showModal = false" 
+      class="w-full mt-2 py-2 bg-transparent hover:bg-[#ede6d6]/30 text-[#5a3a1a] hover:text-[#3b1f0e] font-semibold rounded-xl transition-all duration-200 cursor-pointer border-0 text-sm"
+    >
+      Tutup
+    </button>
+  </div>
+</div>
+
 </body>
 </html>

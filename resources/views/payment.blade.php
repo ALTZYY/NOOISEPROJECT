@@ -202,10 +202,10 @@
 
         <!-- Search + Title Row -->
         <div class="search-title-row">
-          <div class="search-box">
+          <!-- <div class="search-box">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
             <input type="text" placeholder="Search.." id="searchInput"/>
-          </div>
+          </div> -->
           <h2 class="section-title">Pembayaran</h2>
           <!-- <button class="back-btn" id="backBtn" title="Kembali">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
@@ -214,10 +214,7 @@
 
         <!-- Select All -->
         <div class="select-all-row">
-          <button class="checkbox-btn active" id="selectAllBtn" style="pointer-events: none;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </button>
-          <span class="select-label">Pilih Semua <span class="select-count">({{ $carts->sum('quantity') }})</span></span>
+          <span>Total Semua Product &nbsp;<strong id="cartCountText">({{ $carts->sum('quantity') }})</strong></span>
         </div>
 
         <!-- Dynamic Album Cards -->
@@ -270,13 +267,13 @@
         <!-- Transaction Protection -->
         <div class="section-block">
           <h3 class="block-title protection-title">Perlindungan transaksi</h3>
-          <div class="protection-row">
-            <button class="checkbox-btn active" id="protectionBtn">
+          <div class="protection-row" id="protectionRow">
+            <button type="button" class="checkbox-btn active" id="protectionBtn" aria-label="Aktifkan Layanan Premium">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             </button>
             <div class="protection-info">
               <div class="protection-name">Aktifkan Layanan Premium</div>
-              <div class="protection-price">Rp 500.00</div>
+              <div class="protection-price">Rp 5.000</div>
             </div>
           </div>
         </div>
@@ -433,8 +430,9 @@
         // Initial total render
         updateTotal();
 
-        if (protectionBtn) {
-          protectionBtn.addEventListener('click', function() {
+        const protectionRow = document.getElementById('protectionRow');
+        if (protectionRow && protectionBtn) {
+          protectionRow.addEventListener('click', function() {
             isPremiumActive = !isPremiumActive;
             if (isPremiumActive) {
               protectionBtn.classList.add('active');

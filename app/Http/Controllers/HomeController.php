@@ -13,6 +13,7 @@ class HomeController extends Controller
     {
         $userEmail = $request->session()->get('user_email');
         $cartCount = 0;
+        $user = null;
         
         if ($userEmail) {
             $user = User::where('email', $userEmail)->first();
@@ -33,6 +34,6 @@ class HomeController extends Controller
             'nooisefoto/slide6.png',
         ];
 
-        return view('home', compact('cartCount', 'products', 'slides'));
+        return view('home', compact('cartCount', 'products', 'slides', 'user'));
     }
 }

@@ -236,21 +236,36 @@ body {
 }
 
 .checkbox-btn {
-  width: 28px; height: 28px;
-  border-radius: 8px;
-  border: none;
-  background: var(--brown-dark);
-  color: #fff;
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  border: 1.5px solid var(--brown-light);
+  background: transparent;
+  color: transparent;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
-  transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
-  box-shadow: 0 2px 8px rgba(90,58,40,0.2);
+  transition: all var(--transition);
+  box-shadow: none;
+  pointer-events: none; /* Let clicks pass through to protection-row */
 }
-.checkbox-btn:hover { background: var(--brown-mid); }
+.checkbox-btn svg {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity var(--transition), transform var(--transition);
+  color: #fff;
+}
+.checkbox-btn.active {
+  background: var(--brown-dark);
+  border-color: var(--brown-dark);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(90,58,40,0.18);
+}
+.checkbox-btn.active svg {
+  opacity: 1;
+  transform: scale(1);
+}
 .checkbox-btn:active {
-  transform: scale(0.82);
-  box-shadow: 0 1px 3px rgba(90,58,40,0.15);
+  transform: scale(0.88);
 }
 .checkbox-btn.inactive {
   background: var(--bg-inner);
@@ -258,6 +273,16 @@ body {
   box-shadow: none;
   border: 1.5px solid var(--brown-light);
 }
+
+/* Parent Hover state for unified checklist behavior */
+.protection-row:hover .checkbox-btn {
+  border-color: var(--brown-dark);
+}
+.protection-row:hover .checkbox-btn.active {
+  background: var(--brown-mid);
+  border-color: var(--brown-mid);
+}
+
 
 .select-label {
   font-size: 14px;
@@ -436,6 +461,15 @@ body {
   border-radius: var(--radius-md);
   padding: 14px 16px;
   box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  user-select: none;
+  border: 1.5px solid transparent;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.protection-row:hover {
+  background: #fdfcfb;
+  border-color: rgba(90, 58, 40, 0.1);
+  box-shadow: var(--shadow-md);
 }
 /* .protection-info {} */
 .protection-name { font-weight: 600; font-size: 14px; color: var(--text-dark); }

@@ -39,13 +39,13 @@
 
                 <div class="input-row">
                     <div class="country-code">
-                        <select>
+                        <select name="country_code">
                             <option value="+62">+62</option>
                             <option value="+1">+1</option>
                         </select>
                     </div>
                     <div class="phone-number">
-                        <input type="tel" placeholder="Phone Number" required>
+                        <input type="tel" name="phone_number" placeholder="Phone Number" required value="{{ old('phone_number') }}">
                     </div>
                 </div>
 
