@@ -5,18 +5,18 @@ function showEdit(el) {
   if (!modal) return;
 
   const id = el.getAttribute('data-id') || '';
-  const nama = el.getAttribute('data-nama') || '';
+  const email = el.getAttribute('data-email') || '';
   const album = el.getAttribute('data-album') || '';
-  const status = el.getAttribute('data-status') || '';
+  const statusPesanan = el.getAttribute('data-status-pesanan') || '';
   const harga = el.getAttribute('data-harga') || '';
 
   modal.querySelector('[data-field="id"]').textContent = id;
-  modal.querySelector('[data-field="nama"]').textContent = nama;
+  modal.querySelector('[data-field="nama"]').textContent = email;
   modal.querySelector('[data-field="album"]').textContent = album;
   modal.querySelector('[data-field="harga"]').textContent = harga;
 
-  const select = modal.querySelector('select[data-field="status"]');
-  if (select) select.value = status;
+  const selectPesanan = modal.querySelector('select[data-field="status_pesanan"]');
+  if (selectPesanan) selectPesanan.value = statusPesanan;
 
   modal.classList.remove('hidden');
 }
@@ -26,4 +26,3 @@ function closeEditModal() {
   if (!modal) return;
   modal.classList.add('hidden');
 }
-
