@@ -48,6 +48,10 @@ class AuthController extends Controller
         // Simpan email login ke session supaya cart bisa dipisah per user
         $request->session()->put('user_email', $user->email);
 
+        if ($user->role === 'admin') {
+            return redirect('/admin/dashboard')->with('success', 'Selamat datang Admin!');
+        }
+
         return redirect('/home')->with('success', 'Login berhasil');
 
 

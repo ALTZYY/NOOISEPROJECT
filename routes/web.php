@@ -77,4 +77,30 @@ Route::post('/pay/success', [\App\Http\Controllers\PaymentController::class, 'su
 Route::post('/api/midtrans/callback', [\App\Http\Controllers\PaymentController::class, 'callback'])->name('payment.callback');
 
 
+// ==========================================
+// RUTE KHUSUS ADMIN (Dilindungi Middleware 'is_admin')
+// ==========================================
+Route::middleware(['is_admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin'); // Memanggil view admin.blade.php Anda
+    })->name('admin.dashboard');
+});
+
+// Temporary route to seed the admin account easily via browser
+Route::get('/seed-admin', function () {
+    $admin = \App\Models\User::updateOrCreate(
+        ['email' => 'admin@gmail.com'],
+        [
+            'name' => 'Administrator Nooise',
+            'phone_number' => '+628123456789',
+            'password' => \Illuminate\Support\Facades\Hash::make('admin1234'),
+            'role' => 'admin',
+        ]
+    );
+
+    return 'Akun Admin berhasil dibuat!<br>Email: <b>admin@gmail.com</b><br>Password: <b>admin1234</b><br><br><a href="/login">Kembali ke halaman Login</a>';
+});
+
+
+
 
