@@ -12,7 +12,7 @@
 
     <div class="background-container">
         <div class="logo-top">
-            <h1>n<span>∞</span>ise</h1>
+            <img src="{{ asset('nooisefoto/nooise.png') }}" alt="Nooise Logo" style="max-height: 85px; width: auto; object-fit: contain; display: block; margin: 0 auto;">
         </div>
         <div class="gambarutama">
             <img src="{{ asset('nooisefoto/background.png') }}" alt="background">
@@ -31,8 +31,9 @@
                     <input type="email" name="email" placeholder="Email" required>
                 </div>
 
-                <div class="input-group">
-                    <input type="password" name="password" placeholder="Password" required>
+                <div class="input-group" style="position: relative;">
+                    <input type="password" name="password" id="passwordInput" placeholder="Password" required style="padding-right: 50px;">
+                    <i class="fa-regular fa-eye-slash" id="togglePassword" style="position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: #63422d; cursor: pointer;"></i>
                 </div>
 
 
@@ -51,5 +52,24 @@
         </div>
     </div>
 
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('passwordInput');
+
+        togglePassword.addEventListener('click', function () {
+            // toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // toggle the eye icon
+            if (type === 'password') {
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+    </script>
 </body>
 </html>

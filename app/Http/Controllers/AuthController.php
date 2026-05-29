@@ -56,5 +56,33 @@ class AuthController extends Controller
 
 
     }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('user_email');
+        return redirect('/login')->with('success', 'Logout berhasil.');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $email = $request->session()->get('user_email');
+        if (!$email) {
+            return redirect()->back()->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        $user = User::where('email', $email)->first();
+        if (!$user) {
+            return redirect()->back()->with('error', 'User tidak ditemukan.');
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Password berhasil direset.');
+    }
 }
 

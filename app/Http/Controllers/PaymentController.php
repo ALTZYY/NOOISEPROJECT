@@ -104,6 +104,11 @@ class PaymentController extends Controller
             // Dapatkan token Snap dari Midtrans
             $snapToken = Snap::getSnapToken($payload);
 
+            // Gabungkan nama album dari keranjang
+            $albumNames = $carts->map(function ($cart) {
+                return $cart->product->name . ' (' . $cart->quantity . 'x)';
+            })->implode(', ');
+
             // Simpan data order ke database dengan status pending
             $order = Order::create([
                 'user_id' => $user->id,
@@ -116,6 +121,8 @@ class PaymentController extends Controller
                 'longitude' => $request->input('longitude'),
                 'premium_protection' => $isPremium,
                 'snap_token' => $snapToken,
+                'album_title' => $albumNames,
+                'order_status' => 'Menunggu',
             ]);
 
             return response()->json([
@@ -159,6 +166,7 @@ class PaymentController extends Controller
 
         // Update status order menjadi success
         $order->status = 'success';
+        $order->order_status = 'Diproses';
         $order->save();
 
         // Kosongkan keranjang belanja milik user setelah pembayaran berhasil
@@ -181,10 +189,13 @@ class PaymentController extends Controller
                 $transactionStatus = $request->transaction_status;
                 if ($transactionStatus == 'capture' || $transactionStatus == 'settlement') {
                     $order->status = 'success';
+                    $order->order_status = 'Diproses';
                 } elseif ($transactionStatus == 'pending') {
                     $order->status = 'pending';
+                    $order->order_status = 'Menunggu';
                 } elseif ($transactionStatus == 'deny' || $transactionStatus == 'expire' || $transactionStatus == 'cancel') {
                     $order->status = 'failed';
+                    $order->order_status = 'Dibatalkan';
                 }
                 $order->save();
             }

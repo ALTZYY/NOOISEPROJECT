@@ -11,7 +11,9 @@
 
     <div class="container">
         <header>
-            <h1 class="logo">nooise</h1>
+            <div class="logo">
+                <img src="{{ asset('nooisefoto/nooise.png') }}" alt="Nooise Logo" style="max-height: 85px; width: auto; object-fit: contain; display: block; margin: 0 auto;">
+            </div>
         </header>
 
         <div class="gambarutama">
@@ -39,9 +41,17 @@
 
                 <div class="input-row">
                     <div class="country-code">
-                        <select name="country_code">
-                            <option value="+62">+62</option>
-                            <option value="+1">+1</option>
+                        <select name="country_code" style="font-style: normal; cursor: pointer;">
+                            <option value="+62" {{ old('country_code') == '+62' ? 'selected' : '' }}>🇮🇩 +62 (ID)</option>
+                            <option value="+60" {{ old('country_code') == '+60' ? 'selected' : '' }}>🇲🇾 +60 (MY)</option>
+                            <option value="+65" {{ old('country_code') == '+65' ? 'selected' : '' }}>🇸🇬 +65 (SG)</option>
+                            <option value="+66" {{ old('country_code') == '+66' ? 'selected' : '' }}>🇹🇭 +66 (TH)</option>
+                            <option value="+63" {{ old('country_code') == '+63' ? 'selected' : '' }}>🇵🇭 +63 (PH)</option>
+                            <option value="+1" {{ old('country_code') == '+1' ? 'selected' : '' }}>🇺🇸 +1 (US)</option>
+                            <option value="+44" {{ old('country_code') == '+44' ? 'selected' : '' }}>🇬🇧 +44 (UK)</option>
+                            <option value="+61" {{ old('country_code') == '+61' ? 'selected' : '' }}>🇦🇺 +61 (AU)</option>
+                            <option value="+81" {{ old('country_code') == '+81' ? 'selected' : '' }}>🇯🇵 +81 (JP)</option>
+                            <option value="+82" {{ old('country_code') == '+82' ? 'selected' : '' }}>🇰🇷 +82 (KR)</option>
                         </select>
                     </div>
                     <div class="phone-number">
@@ -50,13 +60,13 @@
                 </div>
 
                 <div class="input-group password-group">
-                    <input type="password" name="password" placeholder="Password" required>
-                    <i class="fa-regular fa-eye-slash"></i>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <i class="fa-regular fa-eye-slash" id="togglePasswordBtn"></i>
                 </div>
 
                 <div class="input-group password-group">
-                    <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
-                    <i class="fa-regular fa-eye-slash"></i>
+                    <input type="password" name="password_confirmation" id="passwordConfirm" placeholder="Confirm Password" required>
+                    <i class="fa-regular fa-eye-slash" id="togglePasswordConfirmBtn"></i>
                 </div>
 
                 <p class="terms">
@@ -68,6 +78,28 @@
         </main>
     </div>
 
+    <script>
+        function setupToggle(btnId, inputId) {
+            const toggleBtn = document.getElementById(btnId);
+            const inputField = document.getElementById(inputId);
+
+            toggleBtn.addEventListener('click', function () {
+                const type = inputField.getAttribute('type') === 'password' ? 'text' : 'password';
+                inputField.setAttribute('type', type);
+
+                if (type === 'password') {
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            });
+        }
+
+        setupToggle('togglePasswordBtn', 'password');
+        setupToggle('togglePasswordConfirmBtn', 'passwordConfirm');
+    </script>
 </body>
 </html>
 

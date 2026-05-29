@@ -30,10 +30,10 @@
           <!-- Brand -->
           <div class="px-6 pt-6 pb-4 flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-nooise-brown-mid flex items-center justify-center">
-              <img src="../all foto/nooise.png" alt="Nooise" class="w-8 h-8 object-contain" />
+              <img src="{{ asset('nooisefoto/nooisebg.jpeg') }}" alt="Nooise" class="w-40 h-40 object-contain" />
             </div>
             <div>
-              <div class="font-serif text-2xl tracking-tight">Nooise</div>
+              <div class="brand-title font-serif text-2xl tracking-tight">Nooise</div>
               <div class="text-xs text-nooise-cream-dark/80">Admin Panel</div>
             </div>
           </div>
@@ -77,9 +77,12 @@
               </button> -->
 
               <div class="flex items-center gap-3">
-                <button id="btnLogout" class="logout-btn" type="button" aria-label="Logout">
-                  <i class="fa-solid fa-right-from-bracket text-nooise-brown-dark"></i>
-                </button>
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                  @csrf
+                  <button id="btnLogout" class="logout-btn" type="submit" aria-label="Logout">
+                    <i class="fa-solid fa-right-from-bracket text-nooise-brown-dark"></i>
+                  </button>
+                </form>
               </div>
 
             </div>
@@ -89,6 +92,13 @@
 
         <!-- Content -->
         <section class="px-6 py-6">
+
+          @if(session('success'))
+            <div class="mb-6 px-4 py-3 rounded-xl bg-nooise-brown-mid/10 border border-nooise-brown-dark/20 text-nooise-brown-dark flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-nooise-brown-dark"></i>
+              <span class="text-sm font-semibold">{{ session('success') }}</span>
+            </div>
+          @endif
 
           <!-- Page title -->
           <div class="flex items-end justify-between gap-3 mb-6">
@@ -101,24 +111,24 @@
           <!-- Quick Stats -->
           <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
 
-            <div class="card-metric">
+             <div class="card-metric">
               <div class="flex items-start justify-between gap-3">
                 <div>
                   <div class="text-xs text-nooise-text/70 font-medium">Total Pendapatan</div>
-                  <div class="metric-value">Rp 310.000</div>
+                  <div class="metric-value">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</div>
                 </div>
                 <div class="metric-icon bg-nooise-brown-mid/20 text-nooise-brown-dark">
                   <i class="fa-solid fa-coins"></i>
                 </div>
               </div>
-              <div class="mt-2 text-xs text-nooise-text/60">Semua produk</div>
+              <div class="mt-2 text-xs text-nooise-text/60">Semua produk sukses</div>
             </div>
 
             <div class="card-metric">
               <div class="flex items-start justify-between gap-3">
                 <div>
                   <div class="text-xs text-nooise-text/70 font-medium">Pesanan Baru</div>
-                  <div class="metric-value">1</div>
+                  <div class="metric-value">{{ $newOrdersCount }}</div>
                 </div>
                 <div class="metric-icon bg-nooise-brown-mid/20 text-nooise-brown-dark">
                   <i class="fa-solid fa-bag-shopping"></i>
@@ -149,7 +159,7 @@
             <div class="px-5 pt-5 pb-3 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
               <div>
                 <h2 class="text-lg font-semibold text-nooise-brown-dark">Pesanan Terbaru</h2>
-                <p class="text-sm text-nooise-text/60">Data contoh (bisa diganti dengan backend nanti).</p>
+                <p class="text-sm text-nooise-text/60">Daftar transaksi pesanan dari database.</p>
               </div>
               <div class="flex items-center gap-2">
                 <!-- tombol refresh dihapus sesuai permintaan -->
@@ -175,108 +185,62 @@
                     </tr>
                   </thead>
                   <tbody class="align-middle">
-                    <tr class="tr">
-                      <td class="td">NO-1042</td>
-                      <td class="td">contoh@gmail.com</td>
-                      <td class="td">Drake - More Life</td>
-                      <td class="td"><span class="badge badge-paid">Lunas</span></td>
-                      <td class="td"><span class="badge badge-processing">Diproses</span></td>
-                      <td class="td">Rp 310.000</td>
-                      <td class="td">
-                        <div class="flex gap-2">
-                          <a href="#" class="btn-icon btn-icon-brown" aria-label="Edit pesanan" data-id="NO-1042"
-                            data-email="contoh@gmail.com" data-album="Drake - More Life" data-status-pembayaran="Lunas"
-                            data-status-pesanan="Diproses" data-harga="Rp 310.000" onclick="showEdit(this)"><i
-                              class="fa-solid fa-pen"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <!-- <tr class="tr">
-                      <td class="td">NO-1041</td>
-                      <td class="td">salsa@gmail.com</td>
-                      <td class="td">Keane - Hopes and Fears</td>
-                      <td class="td"><span class="badge badge-paid">Lunas</span></td>
-                      <td class="td"><span class="badge badge-pending">Siap Dikirim</span></td>
-                      <td class="td">Rp 275.000</td>
-                      <td class="td">
-                        <div class="flex gap-2">
-                          <a href="#" class="btn-icon" aria-label="Detail pesanan" data-id="NO-1041"
-                            data-email="salsa@gmail.com" data-album="Keane - Hopes and Fears" 
-                            data-status-pembayaran="Lunas" data-status-pesanan="Siap Dikirim"
-                            data-harga="Rp 275.000" onclick="showEdit(this)"><i class="fa-regular fa-eye"></i></a>
-                          <a href="#" class="btn-icon btn-icon-brown" aria-label="Edit pesanan" data-id="NO-1041"
-                            data-email="salsa@gmail.com" data-album="Keane - Hopes and Fears" 
-                            data-status-pembayaran="Lunas" data-status-pesanan="Siap Dikirim"
-                            data-harga="Rp 275.000" onclick="showEdit(this)"><i class="fa-solid fa-pen"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr class="tr">
-                      <td class="td">NO-1040</td>
-                      <td class="td">bima@gmail.com</td>
-                      <td class="td">The Weeknd - House of Balloons</td>
-                      <td class="td"><span class="badge badge-paid">Lunas</span></td>
-                      <td class="td"><span class="badge badge-shipped">Dikirim</span></td>
-                      <td class="td">Rp 340.000</td>
-                      <td class="td">
-                        <div class="flex gap-2">
-                          <a href="#" class="btn-icon" aria-label="Detail pesanan" data-id="NO-1040"
-                            data-email="bima@gmail.com" data-album="The Weeknd - House of Balloons" 
-                            data-status-pembayaran="Lunas" data-status-pesanan="Dikirim"
-                            data-harga="Rp 340.000" onclick="showEdit(this)"><i class="fa-regular fa-eye"></i></a>
-                          <a href="#" class="btn-icon btn-icon-brown" aria-label="Edit pesanan" data-id="NO-1040"
-                            data-email="bima@gmail.com" data-album="The Weeknd - House of Balloons" 
-                            data-status-pembayaran="Lunas" data-status-pesanan="Dikirim"
-                            data-harga="Rp 340.000" onclick="showEdit(this)"><i class="fa-solid fa-pen"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr class="tr">
-                      <td class="td">NO-1039</td>
-                      <td class="td">alya@gmail.com</td>
-                      <td class="td">Justin Bieber - My World</td>
-                      <td class="td"><span class="badge badge-pending">Belum Dibayar</span></td>
-                      <td class="td"><span class="badge badge-processing">Menunggu</span></td>
-                      <td class="td">Rp 260.000</td>
-                      <td class="td">
-                        <div class="flex gap-2">
-                          <a href="#" class="btn-icon" aria-label="Detail pesanan" data-id="NO-1039"
-                            data-email="alya@gmail.com" data-album="Justin Bieber - My World" 
-                            data-status-pembayaran="Belum Dibayar" data-status-pesanan="Menunggu"
-                            data-harga="Rp 260.000" onclick="showEdit(this)"><i class="fa-regular fa-eye"></i></a>
-                          <a href="#" class="btn-icon btn-icon-brown" aria-label="Edit pesanan" data-id="NO-1039"
-                            data-email="alya@gmail.com" data-album="Justin Bieber - My World" 
-                            data-status-pembayaran="Belum Dibayar" data-status-pesanan="Menunggu"
-                            data-harga="Rp 260.000" onclick="showEdit(this)"><i class="fa-solid fa-pen"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr class="tr">
-                      <td class="td">NO-1038</td>
-                      <td class="td">fajar@gmail.com</td>
-                      <td class="td">21 Savage - Umbrella</td>
-                      <td class="td"><span class="badge badge-cancel">Gagal/Batal</span></td>
-                      <td class="td"><span class="badge badge-cancel">Dibatalkan</span></td>
-                      <td class="td">Rp 295.000</td>
-                      <td class="td">
-                        <div class="flex gap-2">
-                          <a href="#" class="btn-icon" aria-label="Detail pesanan" data-id="NO-1038"
-                            data-email="fajar@gmail.com" data-album="21 Savage - Umbrella" 
-                            data-status-pembayaran="Gagal/Batal" data-status-pesanan="Dibatalkan"
-                            data-harga="Rp 295.000" onclick="showEdit(this)"><i class="fa-regular fa-eye"></i></a>
-                          <a href="#" class="btn-icon btn-icon-brown" aria-label="Edit pesanan" data-id="NO-1038"
-                            data-email="fajar@gmail.com" data-album="21 Savage - Umbrella" 
-                            data-status-pembayaran="Gagal/Batal" data-status-pesanan="Dibatalkan"
-                            data-harga="Rp 295.000" onclick="showEdit(this)"><i class="fa-solid fa-pen"></i></a>
-                        </div>
-                      </td>
-                    </tr> -->
-
-                  </tbody>
+                    @forelse($orders as $order)
+                      <tr class="tr">
+                        <td class="td font-bold text-nooise-brown-dark">{{ $order->order_id }}</td>
+                        <td class="td">{{ $order->email }}</td>
+                        <td class="td max-w-[220px] truncate" title="{{ $order->album_title }}">{{ $order->album_title ?? '-' }}</td>
+                        <td class="td">
+                          @if($order->status === 'success')
+                            <span class="badge badge-paid">Lunas</span>
+                          @elseif($order->status === 'pending')
+                            <span class="badge badge-pending">Belum Dibayar</span>
+                          @else
+                            <span class="badge badge-cancel">Gagal/Batal</span>
+                          @endif
+                        </td>
+                        <td class="td">
+                          @if($order->order_status === 'Diproses')
+                            <span class="badge badge-processing">Diproses</span>
+                          @elseif($order->order_status === 'Siap Dikirim')
+                            <span class="badge badge-pending">Siap Dikirim</span>
+                          @elseif($order->order_status === 'Dikirim')
+                            <span class="badge badge-shipped">Dikirim</span>
+                          @elseif($order->order_status === 'Dibatalkan')
+                            <span class="badge badge-cancel">Dibatalkan</span>
+                          @else
+                            <span class="badge badge-processing">Menunggu</span>
+                          @endif
+                        </td>
+                        <td class="td font-semibold text-nooise-brown-dark">Rp {{ number_format($order->amount, 0, ',', '.') }}</td>
+                        <td class="td">
+                          <div class="flex gap-2 items-center">
+                            <a href="#" class="btn-icon btn-icon-brown" aria-label="Edit pesanan" 
+                              data-id="{{ $order->order_id }}"
+                              data-db-id="{{ $order->id }}"
+                              data-email="{{ $order->email }}" 
+                              data-album="{{ $order->album_title ?? '-' }}" 
+                              data-status-pembayaran="{{ $order->status }}"
+                              data-status-pesanan="{{ $order->order_status }}" 
+                              data-harga="Rp {{ number_format($order->amount, 0, ',', '.') }}" 
+                              onclick="showEdit(this)"><i class="fa-solid fa-pen"></i></a>
+                            <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pesanan {{ $order->order_id }}?')">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn-icon text-red-600 hover:bg-red-50 hover:text-red-700 border-red-200" aria-label="Hapus pesanan">
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                            </form>
+                          </div>
+                        </td>
+                      </tr>
+                    @empty
+                      <tr>
+                        <td colspan="7" class="td text-center text-nooise-text/50 py-8">
+                          Belum ada data pesanan terbaru di database.
+                        </td>
+                      </tr>
+                    @endforelse
                 </table>
               </div>
             </div>
@@ -295,83 +259,106 @@
 
     <div class="relative mx-auto mt-20 w-[92%] max-w-lg">
       <div class="rounded-2xl bg-white/95 border border-nooise-brown-dark/10 shadow-2xl overflow-hidden">
-        <div class="px-5 py-4 border-b border-nooise-brown-dark/10 flex items-start justify-between gap-4">
-          <div>
-            <h3 class="text-lg font-bold text-nooise-brown-dark">Edit Pesanan</h3>
-            <p class="text-sm text-nooise-text/60">Ubah status dan data ringkas pesanan.</p>
+        <form id="editForm" action="" method="POST">
+          @csrf
+          <div class="px-5 py-4 border-b border-nooise-brown-dark/10 flex items-start justify-between gap-4">
+            <div>
+              <h3 class="text-lg font-bold text-nooise-brown-dark">Edit Pesanan</h3>
+              <p class="text-sm text-nooise-text/60">Ubah status dan data ringkas pesanan.</p>
+            </div>
+            <button type="button" class="btn-icon" onclick="closeEditModal()" aria-label="Tutup modal">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
           </div>
-          <button type="button" class="btn-icon" onclick="closeEditModal()" aria-label="Tutup modal">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
 
-        <div class="px-5 py-4">
-          <div class="grid grid-cols-1 gap-3">
-            <div>
-              <label class="text-sm font-semibold text-nooise-text/70">ID Pesanan</label>
-              <div
-                class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-bold text-nooise-brown-dark"
-                data-field="id">-</div>
-            </div>
+          <div class="px-5 py-4">
+            <div class="grid grid-cols-1 gap-3">
+              <div>
+                <label class="text-sm font-semibold text-nooise-text/70">ID Pesanan</label>
+                <div
+                  class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-bold text-nooise-brown-dark"
+                  id="modal-order-id-display">-</div>
+              </div>
 
-            <div>
-              <label class="text-sm font-semibold text-nooise-text/70">Email User</label>
-              <div
-                class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-semibold text-nooise-text"
-                data-field="nama">-</div>
-            </div>
+              <div>
+                <label class="text-sm font-semibold text-nooise-text/70">Email User</label>
+                <div
+                  class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-semibold text-nooise-text"
+                  id="modal-email">-</div>
+              </div>
 
-            <div>
-              <label class="text-sm font-semibold text-nooise-text/70">Judul Album</label>
-              <div
-                class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-semibold text-nooise-text"
-                data-field="album">-</div>
-            </div>
+              <div>
+                <label class="text-sm font-semibold text-nooise-text/70">Judul Album</label>
+                <div
+                  class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-semibold text-nooise-text"
+                  id="modal-album">-</div>
+              </div>
 
-            <div>
-              <label class="text-sm font-semibold text-nooise-text/70">Harga</label>
-              <div
-                class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-bold text-nooise-brown-dark"
-                data-field="harga">-</div>
-            </div>
+              <div>
+                <label class="text-sm font-semibold text-nooise-text/70">Harga</label>
+                <div
+                  class="mt-1 px-3 py-2 rounded-xl bg-nooise-cream border border-nooise-brown-dark/10 text-sm font-bold text-nooise-brown-dark"
+                  id="modal-harga">-</div>
+              </div>
 
-
-            <div>
-              <label class="text-sm font-semibold text-nooise-text/70">Status Pesanan</label>
-              <select
-                class="mt-1 w-full px-3 py-2 rounded-xl bg-white border border-nooise-brown-dark/15 text-sm outline-none"
-                data-field="status_pesanan">
-                <option value="Diproses">Diproses</option>
-                <option value="Siap Dikirim">Siap Dikirim</option>
-                <option value="Dikirim">Dikirim</option>
-                <option value="Menunggu">Menunggu</option>
-                <option value="Dibatalkan">Dibatalkan</option>
-              </select>
+              <div>
+                <label class="text-sm font-semibold text-nooise-text/70">Status Pesanan</label>
+                <select
+                  name="order_status"
+                  id="modal-order-status"
+                  class="mt-1 w-full px-3 py-2 rounded-xl bg-white border border-nooise-brown-dark/15 text-sm outline-none">
+                  <option value="Diproses">Diproses</option>
+                  <option value="Siap Dikirim">Siap Dikirim</option>
+                  <option value="Dikirim">Dikirim</option>
+                  <option value="Menunggu">Menunggu</option>
+                  <option value="Dibatalkan">Dibatalkan</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="px-5 py-4 border-t border-nooise-brown-dark/10 flex items-center justify-end gap-3">
-          <button type="button" class="btn-soft" onclick="closeEditModal()">
-            Batal
-          </button>
-          <button type="button" class="btn-primary">
-            Simpan Perubahan
-          </button>
-        </div>
+          <div class="px-5 py-4 border-t border-nooise-brown-dark/10 flex items-center justify-end gap-3">
+            <button type="button" class="btn-soft" onclick="closeEditModal()">
+              Batal
+            </button>
+            <button type="submit" class="btn-primary">
+              Simpan Perubahan
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 
-  <script src="admin-edit-modal.js"></script>
-  <script src="admin-dashboard-actions.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // interaktif toggle status dihapus karena tombolnya dihapus
-    // (kode sebelumnya: toggle status acak pada baris tabel)
+    function showEdit(element) {
+        const id = element.getAttribute('data-id');
+        const dbId = element.getAttribute('data-db-id');
+        const email = element.getAttribute('data-email');
+        const album = element.getAttribute('data-album');
+        const statusPesanan = element.getAttribute('data-status-pesanan');
+        const harga = element.getAttribute('data-harga');
 
+        // Populate modal fields
+        document.getElementById('modal-order-id-display').textContent = id;
+        document.getElementById('modal-email').textContent = email;
+        document.getElementById('modal-album').textContent = album;
+        document.getElementById('modal-harga').textContent = harga;
+        document.getElementById('modal-order-status').value = statusPesanan;
+
+        // Update form action dynamically
+        const form = document.getElementById('editForm');
+        form.action = `/admin/orders/${dbId}/update-status`;
+
+        // Show modal
+        document.getElementById('editModal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+        document.getElementById('editModal').classList.add('hidden');
+    }
   </script>
 </body>
-
 </html>

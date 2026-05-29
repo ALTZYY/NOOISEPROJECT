@@ -24,7 +24,23 @@
     [x-cloak] { display: none !important; }
   </style>
 </head>
-<body x-data="{ showModal: false }">
+<body x-data="{ showModal: false, showResetForm: false }" x-effect="if (!showModal) showResetForm = false">
+
+@if(session('success'))
+  <div class="fixed top-4 left-1/2 -translate-x-1/2 z-[10000] bg-emerald-50 border border-emerald-200 text-emerald-800 px-6 py-3 rounded-xl shadow-lg flex items-center gap-3 transition-all duration-300 font-sans" id="successAlert">
+    <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span class="text-sm font-semibold">{{ session('success') }}</span>
+    <button onclick="document.getElementById('successAlert').remove()" class="text-[#10b981] hover:text-[#047857] font-bold border-0 bg-transparent cursor-pointer text-base">&times;</button>
+  </div>
+@endif
+
+@if(session('error') || $errors->any())
+  <div class="fixed top-4 left-1/2 -translate-x-1/2 z-[10000] bg-rose-50 border border-rose-200 text-rose-800 px-6 py-3 rounded-xl shadow-lg flex items-center gap-3 transition-all duration-300 font-sans" id="errorAlert">
+    <svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span class="text-sm font-semibold">{{ session('error') ?? $errors->first() }}</span>
+    <button onclick="document.getElementById('errorAlert').remove()" class="text-[#f43f5e] hover:text-[#be123c] font-bold border-0 bg-transparent cursor-pointer text-base">&times;</button>
+  </div>
+@endif
 
 <!-- TOP BAR -->
 <div class="topbar">
@@ -297,26 +313,78 @@
     </button>
 
     @if($user)
-      <!-- Profile User Icon -->
-      <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#ede6d6]/50 flex items-center justify-center text-[#5a2d0c]">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-        </svg>
+      <!-- Profile Details view (hidden when showResetForm is true) -->
+      <div x-show="!showResetForm">
+        <!-- Profile User Icon -->
+        <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#ede6d6]/50 flex items-center justify-center text-[#5a2d0c]">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+
+        <h3 class="text-lg font-bold text-[#3b1f0e] mb-4 font-serif" style="font-family: 'DM Serif Display', serif;">Informasi Profil</h3>
+
+        <!-- Contact Details from DB -->
+        <div class="space-y-3 text-left mb-6">
+          <div class="bg-[#ede6d6]/30 border border-[#ede6d6]/60 rounded-xl p-3.5">
+            <span class="block text-[10px] uppercase tracking-wider text-[#9a7050] font-semibold mb-0.5">Email</span>
+            <span class="text-sm font-bold text-[#3b1f0e] break-all">{{ $user->email }}</span>
+          </div>
+          
+          <div class="bg-[#ede6d6]/30 border border-[#ede6d6]/60 rounded-xl p-3.5">
+            <span class="block text-[10px] uppercase tracking-wider text-[#9a7050] font-semibold mb-0.5">Nomor Telepon</span>
+            <span class="text-sm font-bold text-[#3b1f0e]">{{ $user->phone_number ?? '-' }}</span>
+          </div>
+        </div>
+
+        <!-- Reset Password Trigger Button -->
+        <button 
+          type="button"
+          @click="showResetForm = true"
+          class="block w-full mb-3 py-2.5 bg-[#ede6d6] hover:bg-[#ebdcb9] text-[#5a2d0c] font-semibold rounded-xl text-center shadow-sm hover:shadow transition-all duration-200 text-sm border-0 cursor-pointer"
+        >
+          Reset Password
+        </button>
       </div>
 
-      <h3 class="text-lg font-bold text-[#3b1f0e] mb-4 font-serif" style="font-family: 'DM Serif Display', serif;">Informasi Profil</h3>
+      <!-- Reset Password form view (shown when showResetForm is true) -->
+      <div x-show="showResetForm" x-cloak>
+        <!-- Lock Icon -->
+        <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-[#ede6d6]/50 flex items-center justify-center text-[#5a2d0c]">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+        </div>
 
-      <!-- Contact Details from DB -->
-      <div class="space-y-3 text-left mb-6">
-        <div class="bg-[#ede6d6]/30 border border-[#ede6d6]/60 rounded-xl p-3.5">
-          <span class="block text-[10px] uppercase tracking-wider text-[#9a7050] font-semibold mb-0.5">Email</span>
-          <span class="text-sm font-bold text-[#3b1f0e] break-all">{{ $user->email }}</span>
-        </div>
+        <h3 class="text-lg font-bold text-[#3b1f0e] mb-4 font-serif" style="font-family: 'DM Serif Display', serif;">Reset Password</h3>
         
-        <div class="bg-[#ede6d6]/30 border border-[#ede6d6]/60 rounded-xl p-3.5">
-          <span class="block text-[10px] uppercase tracking-wider text-[#9a7050] font-semibold mb-0.5">Nomor Telepon</span>
-          <span class="text-sm font-bold text-[#3b1f0e]">{{ $user->phone_number ?? '-' }}</span>
-        </div>
+        <form action="{{ route('profile.reset-password') }}" method="POST" class="space-y-4 text-left">
+          @csrf
+          <div class="bg-[#ede6d6]/30 border border-[#ede6d6]/60 rounded-xl p-3.5">
+            <label class="block text-[10px] uppercase tracking-wider text-[#9a7050] font-semibold mb-1">Password Baru</label>
+            <input type="password" name="password" required class="w-full bg-[#fdf8ed] border-0 rounded-lg px-3 py-2 text-sm text-[#6d422d] outline-none font-sans" style="font-style: normal;">
+          </div>
+          <div class="bg-[#ede6d6]/30 border border-[#ede6d6]/60 rounded-xl p-3.5">
+            <label class="block text-[10px] uppercase tracking-wider text-[#9a7050] font-semibold mb-1">Konfirmasi Password Baru</label>
+            <input type="password" name="password_confirmation" required class="w-full bg-[#fdf8ed] border-0 rounded-lg px-3 py-2 text-sm text-[#6d422d] outline-none font-sans" style="font-style: normal;">
+          </div>
+
+          <div class="flex gap-3 mt-6">
+            <button 
+              type="button" 
+              @click="showResetForm = false"
+              class="flex-1 py-2.5 bg-[#ede6d6]/60 hover:bg-[#ede6d6] text-[#5a2d0c] font-semibold rounded-xl text-center transition-all duration-200 text-sm border-0 cursor-pointer"
+            >
+              Batal
+            </button>
+            <button 
+              type="submit" 
+              class="flex-1 py-2.5 bg-[#5a2d0c] hover:bg-[#6b3a1f] text-white font-semibold rounded-xl text-center shadow-md hover:shadow-lg transition-all duration-200 text-sm border-0 cursor-pointer"
+            >
+              Simpan
+            </button>
+          </div>
+        </form>
       </div>
     @else
       <!-- Not Logged In State -->

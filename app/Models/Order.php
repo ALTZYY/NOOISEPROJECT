@@ -20,6 +20,8 @@ class Order extends Model
         'longitude',
         'premium_protection',
         'snap_token',
+        'album_title',
+        'order_status',
     ];
 
     public function user()

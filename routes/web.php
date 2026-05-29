@@ -71,6 +71,8 @@ Route::get('/des/{id}', function (\Illuminate\Http\Request $request, $id) {
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login.post');
 
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register'])->name('register.post');
+Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+Route::post('/profile/reset-password', [\App\Http\Controllers\AuthController::class, 'resetPassword'])->name('profile.reset-password');
 
 Route::post('/pay/checkout', [\App\Http\Controllers\PaymentController::class, 'checkout'])->name('payment.checkout');
 Route::post('/pay/success', [\App\Http\Controllers\PaymentController::class, 'success'])->name('payment.success');
@@ -81,9 +83,9 @@ Route::post('/api/midtrans/callback', [\App\Http\Controllers\PaymentController::
 // RUTE KHUSUS ADMIN (Dilindungi Middleware 'is_admin')
 // ==========================================
 Route::middleware(['is_admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin'); // Memanggil view admin.blade.php Anda
-    })->name('admin.dashboard');
+    Route::get('/admin/dashboard', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/admin/orders/{id}/update-status', [\App\Http\Controllers\AdminController::class, 'updateOrderStatus'])->name('admin.orders.update-status');
+    Route::delete('/admin/orders/{id}', [\App\Http\Controllers\AdminController::class, 'destroy'])->name('admin.orders.destroy');
 });
 
 // Temporary route to seed the admin account easily via browser
